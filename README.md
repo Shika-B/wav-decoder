@@ -1,6 +1,6 @@
 # wav-decoder
 A toy .wav file format decoder in Rust.
-My goal is to play with Fast Fourier Transform algorithm(s).
+My goal is just to play around with Fast Fourier Transform algorithm(s).
 
 My main reference for the specification of the format is:
 http://soundfile.sapp.org/doc/WaveFormat/

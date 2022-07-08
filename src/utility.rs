@@ -19,3 +19,4 @@ pub fn slice_to_array4(index: usize, slice: &[u8]) -> [u8; 4] {
         slice[index + 3],
     ]
 }
+

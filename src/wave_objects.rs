@@ -47,7 +47,10 @@ impl Wave {
             panic!("Invalid AudioFormat")
         }
 
-        let num_channels = u16::from_le_bytes(slice_to_array2(22, header));
+        if slice_to_array2(22, header) != [1, 0] {
+            panic!("Only one channel audio is supported")
+        }
+
         let sample_rate = u32::from_le_bytes(slice_to_array4(24, header));
         let byte_rate = u32::from_le_bytes(slice_to_array4(28, header));
         let block_align = u16::from_le_bytes(slice_to_array2(32, header));
@@ -57,10 +60,15 @@ impl Wave {
             panic!("Incorrect header")
         }
         let data_size = u32::from_le_bytes(slice_to_array4(40, header));
+        let datau16 = data
+            .chunks(2)
+            .map(|slice| i16::from_le_bytes([slice[0], slice[1]]))
+            .collect();
+
         Wave {
             header: WaveHeader {
                 chunk_size,
-                num_channels,
+                num_channels: 1,
                 byte_rate,
                 sample_rate,
                 block_align,
@@ -68,7 +76,7 @@ impl Wave {
             },
             data: WaveData {
                 data_size,
-                data: data.into(),
+                data: datau16,
             },
         }
     }
@@ -76,16 +84,16 @@ impl Wave {
 
 #[derive(Debug)]
 pub struct WaveHeader {
-    chunk_size: u32,
-    num_channels: u16,
-    byte_rate: u32,
-    sample_rate: u32,
-    block_align: u16,
-    bits_per_sample: u16,
+    pub chunk_size: u32,
+    pub num_channels: u16,
+    pub byte_rate: u32,
+    pub sample_rate: u32,
+    pub block_align: u16,
+    pub bits_per_sample: u16,
 }
 
 #[derive(Debug)]
 pub struct WaveData {
-    data_size: u32, // in the reference this field is called Subchunk2Size
-    data: Vec<u8>,
+    pub data_size: u32, // in the reference this field is called Subchunk2Size
+    pub data: Vec<i16>,
 }

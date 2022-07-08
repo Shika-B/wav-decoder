@@ -14,5 +14,5 @@ Todo-list:
 - [x] .wav decoder
 - [ ] Implement FFT (Fast Fourier Transform) 
 - [ ] Basic sound management (turn up/down the sound, stuff like that)
-- [ ] A GUI to plot the whole thing ?
+- [x] A GUI to plot the whole thing
 - [ ] Actual error handling (not panicking on every invalid file) ?

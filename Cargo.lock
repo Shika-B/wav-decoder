@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "wave-files"
+name = "wav-decoder"
 version = "0.1.0"

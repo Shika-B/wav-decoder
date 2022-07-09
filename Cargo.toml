@@ -1,5 +1,5 @@
 [package]
-name = "wave-files"
+name = "wav-decoder"
 version = "0.1.0"
 edition = "2021"
 

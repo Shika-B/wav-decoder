@@ -94,6 +94,6 @@ pub struct WaveHeader {
 
 #[derive(Debug)]
 pub struct WaveData {
-    pub data_size: u32, // in the reference this field is called Subchunk2Size
+    pub data_size: u32, // in the reference at the top of the file, this field is called Subchunk2Size
     pub data: Vec<i16>,
 }
